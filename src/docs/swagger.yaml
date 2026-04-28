@@ -1,0 +1,95 @@
+openapi: 3.0.0
+info:
+  title: StarEast Commerce API
+  version: 1.0.0
+  description: Simple in-memory e-commerce API with JWT authentication and checkout.
+servers:
+  - url: http://localhost:3000
+paths:
+  /healthcheck:
+    get:
+      summary: Healthcheck endpoint
+      responses:
+        "200":
+          description: API is healthy
+  /register:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password]
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "201":
+          description: User created
+        "400":
+          description: Validation error
+  /login:
+    post:
+      summary: Login and get JWT token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password]
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Login success
+        "401":
+          description: Invalid credentials
+  /checkout:
+    post:
+      summary: Perform checkout (authenticated users only)
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [paymentMethod, items]
+              properties:
+                paymentMethod:
+                  type: string
+                  enum: [cash, credit_card]
+                items:
+                  type: array
+                  items:
+                    type: object
+                    required: [productId, quantity]
+                    properties:
+                      productId:
+                        type: integer
+                      quantity:
+                        type: integer
+      responses:
+        "200":
+          description: Checkout done
+        "400":
+          description: Invalid checkout data
+        "401":
+          description: Missing or invalid token
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
