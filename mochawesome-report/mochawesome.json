@@ -1,0 +1,195 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2026-04-28T15:31:05.717Z",
+    "end": "2026-04-28T15:31:05.871Z",
+    "duration": 154,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "25af8317-b253-45ed-b20a-3f3980fd851b",
+      "title": "",
+      "fullFile": "C:\\Project\\stareast-commerce\\test\\pathCoverage\\pathCoverage.test.js",
+      "file": "\\test\\pathCoverage\\pathCoverage.test.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "1846afcc-512e-4f84-a99c-3681432d208b",
+          "title": "API Path Coverage",
+          "fullFile": "C:\\Project\\stareast-commerce\\test\\pathCoverage\\pathCoverage.test.js",
+          "file": "\\test\\pathCoverage\\pathCoverage.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before all\" hook in \"API Path Coverage\"",
+              "fullTitle": "API Path Coverage \"before all\" hook in \"API Path Coverage\"",
+              "timedOut": false,
+              "duration": 83,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "serverProcess = spawn(\"node\", [\"src/server.js\"], {\n  env: { ...process.env, PORT: TEST_PORT },\n  stdio: \"ignore\",\n  shell: true,\n});\nawait waitForServerReady();",
+              "err": {},
+              "uuid": "540d1155-c7d9-4ca7-add1-3a12ce4ae785",
+              "parentUUID": "1846afcc-512e-4f84-a99c-3681432d208b",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after all\" hook in \"API Path Coverage\"",
+              "fullTitle": "API Path Coverage \"after all\" hook in \"API Path Coverage\"",
+              "timedOut": false,
+              "duration": 0,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "if (serverProcess && !serverProcess.killed) {\n  serverProcess.kill();\n}",
+              "err": {},
+              "uuid": "81c70a63-ce52-4937-8e86-58174e09984a",
+              "parentUUID": "1846afcc-512e-4f84-a99c-3681432d208b",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "covers GET /healthcheck",
+              "fullTitle": "API Path Coverage covers GET /healthcheck",
+              "timedOut": false,
+              "duration": 4,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await request(BASE_URL).get(\"/healthcheck\");\nexpect(response.status).to.equal(200);\nexpect(response.body).to.deep.equal({ status: \"ok\" });",
+              "err": {},
+              "uuid": "e295b4e3-88c5-4394-a9ca-5ec6d73133e6",
+              "parentUUID": "1846afcc-512e-4f84-a99c-3681432d208b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "covers POST /register with valid user data from README patterns",
+              "fullTitle": "API Path Coverage covers POST /register with valid user data from README patterns",
+              "timedOut": false,
+              "duration": 26,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const uniqueEmail = `john.path.coverage.${Date.now()}@example.com`;\nconst payload = {\n  name: \"John\",\n  email: uniqueEmail,\n  password: \"123456\",\n};\nconst response = await request(BASE_URL).post(\"/register\").send(payload);\nexpect(response.status).to.equal(201);\nexpect(response.body.message).to.equal(\"user registered successfully\");\nexpect(response.body.user).to.include({\n  name: payload.name,\n  email: payload.email,\n});\nexpect(response.body.user).to.have.property(\"id\");",
+              "err": {},
+              "uuid": "0badb046-c415-4692-97a4-c627d50bf6c5",
+              "parentUUID": "1846afcc-512e-4f84-a99c-3681432d208b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "covers POST /login using preloaded README user",
+              "fullTitle": "API Path Coverage covers POST /login using preloaded README user",
+              "timedOut": false,
+              "duration": 25,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const loginPayload = {\n  email: \"alice@example.com\",\n  password: \"password123\",\n};\nconst response = await request(BASE_URL).post(\"/login\").send(loginPayload);\nexpect(response.status).to.equal(200);\nexpect(response.body).to.have.property(\"token\");\nauthToken = response.body.token;",
+              "err": {},
+              "uuid": "68cb2335-05c6-4858-868f-94b53a47892b",
+              "parentUUID": "1846afcc-512e-4f84-a99c-3681432d208b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "covers POST /checkout with bearer token and valid items",
+              "fullTitle": "API Path Coverage covers POST /checkout with bearer token and valid items",
+              "timedOut": false,
+              "duration": 6,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const checkoutPayload = {\n  paymentMethod: \"cash\",\n  items: [\n    { productId: 1, quantity: 1 },\n    { productId: 2, quantity: 2 },\n  ],\n};\nconst response = await request(BASE_URL)\n  .post(\"/checkout\")\n  .set(\"Authorization\", `Bearer ${authToken}`)\n  .send(checkoutPayload);\nexpect(response.status).to.equal(200);\nexpect(response.body).to.include({\n  message: \"checkout completed\",\n  paymentMethod: \"cash\",\n  subtotal: 1500,\n  discount: 150,\n  total: 1350,\n});\nexpect(response.body.items).to.be.an(\"array\").with.length(2);",
+              "err": {},
+              "uuid": "c289eb61-2549-4f96-84c7-e97b327f0441",
+              "parentUUID": "1846afcc-512e-4f84-a99c-3681432d208b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "e295b4e3-88c5-4394-a9ca-5ec6d73133e6",
+            "0badb046-c415-4692-97a4-c627d50bf6c5",
+            "68cb2335-05c6-4858-868f-94b53a47892b",
+            "c289eb61-2549-4f96-84c7-e97b327f0441"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 61,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 10000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 10000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "10.8.2"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.3.2"
+    }
+  }
+}
